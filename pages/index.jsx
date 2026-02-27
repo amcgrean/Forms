@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import RequestForm from '../components/RequestForm';
-import '../styles/globals.css';
 
 const PORTAL_SIGNIN_URL = 'https://pro.beisserlumber.com/login';
 const MAIN_SITE_URL = 'https://beisserlumber.com';
