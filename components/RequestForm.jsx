@@ -26,7 +26,7 @@ function validate(fields) {
   return errors;
 }
 
-export default function RequestForm() {
+export default function RequestForm({ onSuccess }) {
   const [fields, setFields] = useState(INITIAL);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
@@ -63,6 +63,7 @@ export default function RequestForm() {
         throw new Error(data.error || 'Submission failed. Please try again.');
       }
       setStatus('success');
+      if (onSuccess) onSuccess();
     } catch (err) {
       setStatus('error');
       setServerError(err.message || 'An unexpected error occurred. Please try again.');
@@ -163,7 +164,7 @@ export default function RequestForm() {
             Submitting…
           </span>
         ) : (
-          'Submit Request'
+          'Request Account'
         )}
       </button>
     </form>
