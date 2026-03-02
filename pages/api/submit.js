@@ -58,12 +58,17 @@ export default async function handler(req, res) {
   const emailBody = buildEmailBody({ fullName, email, phone, businessName, accountNumber, notes });
 
   try {
-    await resend.emails.send({
+    const { error: sendError } = await resend.emails.send({
       from: process.env.FROM_EMAIL,
       to: process.env.TO_EMAIL,
       subject: `New Pro Account Request - ${businessName.trim()}`,
       text: emailBody,
     });
+
+    if (sendError) {
+      console.error('Resend API error:', sendError);
+      return res.status(500).json({ error: 'Failed to send email. Please try again later.' });
+    }
 
     return res.status(200).json({ success: true });
   } catch (err) {
