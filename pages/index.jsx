@@ -28,6 +28,17 @@ export default function Home() {
           <img src="/logo.png" alt="Beisser Lumber Company" style={s.logo} />
         </header>
 
+        {/* ── Request Form ── */}
+        <section style={s.formSection}>
+          <div style={s.formWrap}>
+            <h2 style={s.formHeading}>Request Online Account Access</h2>
+            <p style={s.formSubheading}>
+              Already have a Beisser Lumber account? Fill out the form below to get connected to the Customer Portal.
+            </p>
+            <RequestForm onSuccess={() => setShowSuccessModal(true)} />
+          </div>
+        </section>
+
         {/* ── Hero Banner ── */}
         <div style={s.hero}>
           <div style={s.heroOverlay}>
@@ -71,7 +82,7 @@ export default function Home() {
               I have a Customer Account with Beisser Lumber Company
             </strong>
             <p style={s.colBody}>
-              Fill out the form below to request online access connected to your existing Beisser Lumber account.
+              Fill out the form above to request online access connected to your existing Beisser Lumber account.
             </p>
           </div>
 
@@ -86,13 +97,6 @@ export default function Home() {
             </a>
           </div>
 
-        </section>
-
-        {/* ── Request Form (always visible) ── */}
-        <section style={s.formSection}>
-          <div style={s.formWrap}>
-            <RequestForm onSuccess={() => setShowSuccessModal(true)} />
-          </div>
         </section>
 
         {/* ── Footer ── */}
@@ -297,12 +301,25 @@ const s = {
   formSection: {
     width: '100%',
     background: '#ffffff',
-    borderBottom: '1px solid #e0e0e0',
+    borderBottom: '3px solid #1a5c2a',
+    boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
   },
   formWrap: {
-    maxWidth: '640px',
+    maxWidth: '860px',
     margin: '0 auto',
-    padding: '0 24px',
+    padding: '40px 40px 48px',
+  },
+  formHeading: {
+    fontSize: 'clamp(1.2rem, 3vw, 1.6rem)',
+    fontWeight: '700',
+    color: '#1a5c2a',
+    margin: '0 0 8px',
+  },
+  formSubheading: {
+    fontSize: '0.95rem',
+    color: '#555555',
+    lineHeight: '1.6',
+    margin: '0 0 28px',
   },
 
   /* Footer */
