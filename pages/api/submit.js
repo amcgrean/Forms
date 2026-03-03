@@ -1,7 +1,5 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 function validateFields({ fullName, email, phone, businessName }) {
   if (!fullName || !fullName.trim()) return 'Full name is required.';
   if (!email || !email.trim()) return 'Email address is required.';
@@ -47,6 +45,13 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
+
+  if (!process.env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not configured.');
+    return res.status(500).json({ error: 'Email service is not configured. Please contact us directly.' });
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const { fullName, email, phone, businessName, accountNumber, notes } = req.body || {};
 
