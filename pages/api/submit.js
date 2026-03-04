@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { getRedis } from '../../lib/redis';
 
 function validateFields({ fullName, email, phone, businessName }) {
   if (!fullName || !fullName.trim()) return 'Full name is required.';
@@ -73,6 +74,24 @@ export default async function handler(req, res) {
     if (sendError) {
       console.error('Resend API error:', sendError);
       return res.status(500).json({ error: 'Failed to send email. Please try again later.' });
+    }
+
+    // Store submission in Redis for the portal (best-effort, non-blocking)
+    try {
+      const redis = getRedis();
+      const submission = {
+        fullName: fullName.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        businessName: businessName.trim(),
+        accountNumber: accountNumber && accountNumber.trim() ? accountNumber.trim() : '',
+        notes: notes && notes.trim() ? notes.trim() : '',
+        submittedAt: new Date().toISOString(),
+      };
+      await redis.lpush('form:submissions', JSON.stringify(submission));
+      await redis.ltrim('form:submissions', 0, 499); // keep latest 500
+    } catch (kvErr) {
+      console.error('Redis storage error (non-fatal):', kvErr);
     }
 
     return res.status(200).json({ success: true });
