@@ -8,6 +8,10 @@ const MAIN_SITE_URL = 'https://beisserlumber.com';
 export default function Home() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  useEffect(() => {
+    fetch('/api/track-visit', { method: 'POST' }).catch(() => {});
+  }, []);
+
   function handleRedirect() {
     window.location.href = MAIN_SITE_URL;
   }
