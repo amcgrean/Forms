@@ -1,244 +1,235 @@
 import Head from 'next/head';
 
 const PORTAL_SIGNIN_URL = 'https://pro.beisserlumber.com';
-const REGISTER_URL = 'https://pro.beisserlumber.com/register'; // ← update to actual Toolbx self-registration URL
-const MAIN_SITE_URL = 'https://beisserlumber.com';
+const REGISTER_URL = 'https://pro.beisserlumber.com/email-registration';
+const MAIN_SITE_URL = 'https://beisserlumber.com/';
+
+const HERO_IMG = 'https://toolbx-ecommerce.s3.us-east-1.amazonaws.com/beisser/windowsdoors-2+(1).png';
+const CONTRACTOR_ICON = 'https://toolbx-ecommerce.s3.us-east-1.amazonaws.com/beisser/Contractor+icon+1+(4).png';
+const MONITOR_ICON = 'https://toolbx-ecommerce.s3.us-east-1.amazonaws.com/beisser/Screen+Icons+Cute+Outline+1+(4).png';
+const LOGO_IMG = 'https://toolbx-order-images.s3.amazonaws.com/470917b9-c47f-4729-82cf-ddd6f079972c.png';
 
 export default function Toolbx() {
   return (
     <>
       <Head>
-        <title>Beisser Lumber — Customer Portal</title>
-        <meta name="description" content="Beisser Lumber Company Customer Portal" />
+        <title>Beisser Lumber Company</title>
+        <meta name="description" content="Payment portal for Beisser Lumber Company, manage your personal account with smooth online payments and more." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div style={s.page}>
-
-        {/* ── Header ── */}
-        <header style={s.header}>
+      {/* ── Nav bar (matches Toolbx layout) ── */}
+      <nav style={s.nav}>
+        <a href="/" style={s.logoLink}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="Beisser Lumber Company" style={s.logo} />
-        </header>
+          <img alt="Beisser Lumber Company" src={LOGO_IMG} style={s.navLogo} />
+        </a>
+      </nav>
 
-        {/* ── Hero Banner ── */}
-        <div style={s.hero}>
-          <div style={s.heroOverlay}>
-            <h1 style={s.heroTitle}>Welcome to our New Customer Portal</h1>
+      {/* ── Main content (mirrors the Toolbx storefront.disabledStorefrontHTML exactly) ── */}
+      <div>
+        <style>{`
+          body { overflow-x: hidden; }
+          .benefits li { margin: 0; }
+          .hero-container { position: relative; width: 100%; }
+          .welcome-txt {
+            color: #fff;
+            font-size: 36px !important;
+            position: absolute;
+            z-index: 1;
+            top: 40px;
+            left: 80px;
+            line-height: 1.25;
+          }
+          #hero-banner {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+          }
+          .feature-item {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-right: 2px solid #ccc;
+          }
+          .feature-item-last {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+          }
+          .feature-column {
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            background: #f9f9f9;
+          }
+          .tbx-sign-in-btn {
+            background-color: #146834;
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-block;
+          }
+          .tbx-sign-in-btn:hover { opacity: 0.88; }
+          @media (max-width: 1024px) {
+            .welcome-txt {
+              font-size: 24px !important;
+              left: 50px;
+              width: 100% !important;
+            }
+            .feature-column {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .feature-item,
+            .feature-item-last {
+              flex-basis: calc(50% - 30px);
+              border-right: none;
+              margin-bottom: 50px;
+            }
+            .feature-item:nth-child(1),
+            .feature-item:nth-child(3) {
+              border-right: 2px solid #ccc;
+            }
+          }
+          @media (max-width: 700px) {
+            .feature-column {
+              flex-direction: column;
+              padding: 10px;
+            }
+            .feature-item {
+              border-bottom: 2px solid #ccc;
+              margin-bottom: 10px;
+            }
+            .feature-item:nth-child(1),
+            .feature-item:nth-child(3) {
+              border-right: none;
+              padding-bottom: 30px;
+            }
+          }
+          @media (max-width: 430px) {
+            .welcome-txt {
+              font-size: 20px !important;
+              left: 20px;
+              width: 100% !important;
+            }
+            .feature-column { padding: 20px; }
+          }
+        `}</style>
+
+        <div className="content-container">
+          <div className="hero-container">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img id="hero-banner" src={HERO_IMG} alt="Beisser Payment" />
           </div>
-        </div>
-
-        {/* ── Benefits Section ── */}
-        <section style={s.benefits}>
-          <p style={s.benefitsHeading}>
+          <h4 className="welcome-txt">Welcome to our<br />New Customer Portal</h4>
+          <h4 style={{ marginBottom: '20px', marginTop: '16px', padding: '0 16px' }}>
             Benefits of the Beisser Lumber Company Customer Portal include:
-          </p>
-          <ul style={s.benefitsList}>
+          </h4>
+          <ul className="benefits" style={{ textAlign: 'left', padding: '0 32px' }}>
             <li>Easy account setup and login.</li>
             <li>24-hour online access to your invoices &amp; statements.</li>
             <li>Pay your account online by credit card or ACH.</li>
             <li>Save preferred payment methods securely online.</li>
             <li>Communicate with your Pro Team via text or email.</li>
           </ul>
-        </section>
+        </div>
 
-        {/* ── Three-Column Section ── */}
-        <section style={s.columns}>
-
-          {/* Column 1 — Sign In */}
-          <div style={s.col}>
-            <p style={s.colBody}>
-              I&apos;ve already set up my online Beisser Lumber Company Customer Portal Account
-            </p>
-            <a href={PORTAL_SIGNIN_URL} style={s.pillLink}>
-              Account Sign-In
-            </a>
+        <div className="feature-column">
+          {/* Column 1 — Account Sign-In */}
+          <div className="feature-item">
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <h5 style={{ fontWeight: 700, marginBottom: '20px', marginTop: '60px' }}>
+                I&apos;ve already set up my online<br />Beisser Lumber Company Customer Portal Account
+              </h5>
+              <a href={PORTAL_SIGNIN_URL} className="tbx-sign-in-btn">
+                Account Sign-In
+              </a>
+            </div>
           </div>
 
-          <div style={s.divider} />
-
-          {/* Column 2 — Create Account (original Toolbx self-registration) */}
-          <div style={{ ...s.col, alignItems: 'center' }}>
-            <HardhatIcon />
-            <strong style={s.colHeading}>
-              I have a Customer Account with Beisser Lumber Company
-            </strong>
-            <p style={s.colBody}>
-              <a href={REGISTER_URL} style={s.inlineLink}>Click here</a>
-              {' '}to create an online account that connects to your existing account with Beisser Lumber Company
-            </p>
+          {/* Column 2 — Create Account (original Toolbx registration) */}
+          <div className="feature-item">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={CONTRACTOR_ICON} alt="Contractor" style={{ width: '80px', height: '80px' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <h5 style={{ fontWeight: 700, marginTop: '10px' }}>
+                I have a Customer Account<br />with Beisser Lumber Company
+              </h5>
+              <p style={{ fontSize: '14px' }}>
+                <a href={REGISTER_URL} style={{ color: '#151b67', textDecoration: 'underline' }}>
+                  Click here
+                </a>
+                {' '}to create an<br />online account that connects to your<br />existing account with Beisser Lumber Company
+              </p>
+            </div>
           </div>
-
-          <div style={s.divider} />
 
           {/* Column 3 — Main Site */}
-          <div style={{ ...s.col, alignItems: 'center' }}>
-            <MonitorIcon />
-            <strong style={s.colHeading}>Main Site</strong>
-            <p style={s.colBody}>
-              <a href={MAIN_SITE_URL} style={s.inlineLink}>Click here</a>
-              {' '}to go back to the main Beisser Lumber Company site
-            </p>
+          <div className="feature-item" style={{ borderRight: 'none' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={MONITOR_ICON} alt="Main Site" style={{ width: '80px', height: '80px' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+              <h5 style={{ fontWeight: 700, marginTop: '10px' }}>Main Site</h5>
+              <p style={{ fontSize: '14px', marginTop: '0' }}>
+                <a href={MAIN_SITE_URL} target="_blank" rel="noopener noreferrer" style={{ color: '#151b67', textDecoration: 'underline' }}>
+                  Click here
+                </a>
+                {' '}to go back to the<br />main Beisser Lumber Company site
+              </p>
+            </div>
           </div>
+        </div>
 
-        </section>
-
-        {/* ── Footer ── */}
-        <footer style={s.footer}>
-          &copy; Beisser Lumber Company 2026. All rights reserved.
-        </footer>
-
+        <div style={{ marginBottom: '100px' }} />
       </div>
 
-      <style>{`
-        @media (max-width: 700px) {
-          .col-row { flex-direction: column !important; }
-          .col-divider { width: 80% !important; height: 1px !important; align-self: center; }
-        }
-      `}</style>
+      {/* ── Footer ── */}
+      <footer style={s.footer}>
+        <div style={s.footerInner}>
+          <p style={s.footerCopy}>© Beisser Lumber Company 2026. All rights reserved.</p>
+        </div>
+      </footer>
     </>
   );
 }
 
-function HardhatIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24"
-      fill="none" stroke="#1a5c2a" strokeWidth="1.6" strokeLinecap="round"
-      strokeLinejoin="round" aria-hidden="true">
-      <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z" />
-      <path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5" />
-      <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
-    </svg>
-  );
-}
-
-function MonitorIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24"
-      fill="none" stroke="#1a5c2a" strokeWidth="1.6" strokeLinecap="round"
-      strokeLinejoin="round" aria-hidden="true">
-      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-      <line x1="8" y1="21" x2="16" y2="21" />
-      <line x1="12" y1="17" x2="12" y2="21" />
-    </svg>
-  );
-}
-
 const s = {
-  page: {
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    background: '#f5f5f5',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-    color: '#222222',
-  },
-  header: {
+  nav: {
     width: '100%',
     background: '#ffffff',
-    padding: '16px 40px',
-    borderBottom: '1px solid #e0e0e0',
+    borderBottom: '1px solid #e8e8e8',
+    padding: '12px 24px',
+    display: 'flex',
+    alignItems: 'center',
   },
-  logo: {
-    height: '60px',
+  logoLink: {
+    display: 'inline-block',
+    textDecoration: 'none',
+  },
+  navLogo: {
+    height: '52px',
     width: 'auto',
   },
-  hero: {
-    width: '100%',
-    minHeight: '180px',
-    background: 'linear-gradient(135deg, #2d1a0e 0%, #1a5c2a 60%, #2d4a1e 100%)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  heroOverlay: {
-    padding: '48px 24px',
-    textAlign: 'center',
-  },
-  heroTitle: {
-    color: '#ffffff',
-    fontSize: 'clamp(1.4rem, 4vw, 2.2rem)',
-    fontWeight: '700',
-    letterSpacing: '0.01em',
-    margin: 0,
-    textShadow: '0 1px 4px rgba(0,0,0,0.4)',
-  },
-  benefits: {
-    width: '100%',
-    background: '#ffffff',
-    padding: '36px 48px',
-    borderBottom: '1px solid #e0e0e0',
-  },
-  benefitsHeading: {
-    fontSize: '1rem',
-    fontWeight: '600',
-    color: '#222222',
-    marginBottom: '14px',
-  },
-  benefitsList: {
-    paddingLeft: '22px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '6px',
-    fontSize: '0.95rem',
-    color: '#444444',
-    lineHeight: '1.6',
-  },
-  columns: {
-    width: '100%',
-    background: '#f0f0f0',
-    display: 'flex',
-    flexDirection: 'row',
-    borderBottom: '1px solid #e0e0e0',
-  },
-  col: {
-    flex: 1,
-    padding: '36px 32px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '14px',
-    textAlign: 'center',
-  },
-  divider: {
-    width: '1px',
-    background: '#cccccc',
-    margin: '24px 0',
-    alignSelf: 'stretch',
-  },
-  colHeading: {
-    fontSize: '0.95rem',
-    fontWeight: '700',
-    color: '#222222',
-    lineHeight: '1.4',
-  },
-  colBody: {
-    fontSize: '0.9rem',
-    color: '#444444',
-    lineHeight: '1.6',
-  },
-  inlineLink: {
-    color: '#1a5c2a',
-    textDecoration: 'underline',
-  },
-  pillLink: {
-    display: 'inline-block',
-    background: '#1a5c2a',
-    color: '#ffffff',
-    borderRadius: '999px',
-    padding: '11px 28px',
-    fontSize: '0.9rem',
-    fontWeight: '600',
-    textDecoration: 'none',
-    letterSpacing: '0.02em',
-    marginTop: '4px',
-  },
   footer: {
-    marginTop: 'auto',
+    background: '#ffffff',
+    borderTop: '1px solid #e8e8e8',
     padding: '24px',
-    fontSize: '0.8rem',
-    color: '#888888',
+  },
+  footerInner: {
+    maxWidth: '1200px',
+    margin: '0 auto',
     textAlign: 'center',
-    background: '#f5f5f5',
+  },
+  footerCopy: {
+    fontSize: '0.8rem',
+    color: '#737373',
   },
 };
