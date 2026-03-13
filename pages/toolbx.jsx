@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 const PORTAL_SIGNIN_URL = 'https://pro.beisserlumber.com';
 const REGISTER_URL = '/';
@@ -11,6 +12,17 @@ const MONITOR_ICON = 'https://toolbx-ecommerce.s3.us-east-1.amazonaws.com/beisse
 const LOGO_IMG = 'https://toolbx-order-images.s3.amazonaws.com/470917b9-c47f-4729-82cf-ddd6f079972c.png';
 
 export default function Toolbx() {
+  useEffect(() => {
+    function sendHeight() {
+      const h = document.documentElement.scrollHeight;
+      window.parent.postMessage({ type: 'beisser-iframe-height', height: h }, '*');
+    }
+    sendHeight();
+    const ro = new ResizeObserver(sendHeight);
+    ro.observe(document.body);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <>
       <Head>
