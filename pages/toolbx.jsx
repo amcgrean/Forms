@@ -1,7 +1,8 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 const PORTAL_SIGNIN_URL = 'https://pro.beisserlumber.com';
-const REGISTER_URL = 'https://pro.beisserlumber.com/email-registration';
+const REGISTER_URL = '/';
 const MAIN_SITE_URL = 'https://beisserlumber.com/';
 
 const HERO_IMG = 'https://toolbx-ecommerce.s3.us-east-1.amazonaws.com/beisser/windowsdoors-2+(1).png';
@@ -164,9 +165,9 @@ export default function Toolbx() {
                 I have a Customer Account<br />with Beisser Lumber Company
               </h5>
               <p style={{ fontSize: '14px' }}>
-                <a href={REGISTER_URL} style={{ color: '#151b67', textDecoration: 'underline' }}>
+                <Link href={REGISTER_URL} style={{ color: '#151b67', textDecoration: 'underline' }}>
                   Click here
-                </a>
+                </Link>
                 {' '}to create an<br />online account that connects to your<br />existing account with Beisser Lumber Company
               </p>
             </div>
