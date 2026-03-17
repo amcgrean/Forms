@@ -162,9 +162,12 @@ export default function Toolbx() {
               <h5 style={{ fontWeight: 700, marginBottom: '20px', marginTop: '60px' }}>
                 I&apos;ve already set up my online<br />Beisser Lumber Company Customer Portal Account
               </h5>
-              <a href={PORTAL_SIGNIN_URL} className="tbx-sign-in-btn">
+              <button
+                className="tbx-sign-in-btn"
+                onClick={() => { window.top.location.href = PORTAL_SIGNIN_URL; }}
+              >
                 Account Sign-In
-              </a>
+              </button>
             </div>
           </div>
 
