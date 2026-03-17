@@ -42,98 +42,80 @@ export default function Toolbx() {
       {/* ── Main content (mirrors the Toolbx storefront.disabledStorefrontHTML exactly) ── */}
       <div>
         <style>{`
-          body { overflow-x: hidden; }
-          .benefits li { margin: 0; }
+          body { overflow-x: hidden; margin: 0; }
+          .benefits li { margin-bottom: 6px; font-size: 15px; }
           .hero-container { position: relative; width: 100%; }
           .welcome-txt {
             color: #fff;
-            font-size: 36px !important;
+            font-size: 38px;
+            font-weight: 700;
             position: absolute;
             z-index: 1;
-            top: 40px;
+            top: 50%;
             left: 80px;
-            line-height: 1.25;
+            transform: translateY(-50%);
+            line-height: 1.2;
+            margin: 0;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
           }
           #hero-banner {
             width: 100%;
-            height: 200px;
+            height: 260px;
             object-fit: cover;
+            display: block;
           }
           .feature-item {
             flex: 1;
-            padding: 10px;
+            padding: 40px 30px;
             text-align: center;
-            border-right: 2px solid #ccc;
+            border-right: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
           }
-          .feature-item-last {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-          }
+          .feature-item:last-child { border-right: none; }
           .feature-column {
-            padding: 50px;
+            padding: 60px 80px;
             display: flex;
             justify-content: center;
-            background: #f9f9f9;
+            background: #f4f4f4;
+            min-height: 260px;
           }
           .tbx-sign-in-btn {
             background-color: #146834;
             color: #fff;
             border: none;
             border-radius: 999px;
-            padding: 12px 28px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
             font-family: inherit;
             text-decoration: none;
             display: inline-block;
+            letter-spacing: 0.01em;
           }
-          .tbx-sign-in-btn:hover { opacity: 0.88; }
+          .tbx-sign-in-btn:hover { background-color: #0f5229; }
           @media (max-width: 1024px) {
-            .welcome-txt {
-              font-size: 24px !important;
-              left: 50px;
-              width: 100% !important;
-            }
-            .feature-column {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: center;
-            }
-            .feature-item,
-            .feature-item-last {
-              flex-basis: calc(50% - 30px);
+            .welcome-txt { font-size: 28px; left: 50px; }
+            .feature-column { padding: 40px; flex-wrap: wrap; }
+            .feature-item {
+              flex-basis: calc(50% - 40px);
               border-right: none;
-              margin-bottom: 50px;
+              border-bottom: 1px solid #ccc;
             }
-            .feature-item:nth-child(1),
-            .feature-item:nth-child(3) {
-              border-right: 2px solid #ccc;
-            }
+            .feature-item:nth-child(odd) { border-right: 1px solid #ccc; }
           }
           @media (max-width: 700px) {
-            .feature-column {
-              flex-direction: column;
-              padding: 10px;
-            }
-            .feature-item {
-              border-bottom: 2px solid #ccc;
-              margin-bottom: 10px;
-            }
-            .feature-item:nth-child(1),
-            .feature-item:nth-child(3) {
-              border-right: none;
-              padding-bottom: 30px;
-            }
+            .welcome-txt { font-size: 22px; left: 30px; }
+            .feature-column { flex-direction: column; padding: 20px; min-height: unset; }
+            .feature-item { border-right: none; border-bottom: 1px solid #ccc; }
+            .feature-item:last-child { border-bottom: none; }
           }
           @media (max-width: 430px) {
-            .welcome-txt {
-              font-size: 20px !important;
-              left: 20px;
-              width: 100% !important;
-            }
-            .feature-column { padding: 20px; }
+            .welcome-txt { font-size: 18px; left: 20px; }
+            #hero-banner { height: 180px; }
           }
         `}</style>
 
@@ -141,12 +123,12 @@ export default function Toolbx() {
           <div className="hero-container">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img id="hero-banner" src={HERO_IMG} alt="Beisser Payment" />
+            <h2 className="welcome-txt">Welcome to our<br />New Customer Portal</h2>
           </div>
-          <h4 className="welcome-txt">Welcome to our<br />New Customer Portal</h4>
-          <h4 style={{ marginBottom: '20px', marginTop: '16px', padding: '0 16px' }}>
+          <h4 style={{ marginBottom: '16px', marginTop: '32px', padding: '0 60px', fontWeight: 700 }}>
             Benefits of the Beisser Lumber Company Customer Portal include:
           </h4>
-          <ul className="benefits" style={{ textAlign: 'left', padding: '0 32px' }}>
+          <ul className="benefits" style={{ textAlign: 'left', padding: '0 80px', marginBottom: '32px' }}>
             <li>Easy account setup and login.</li>
             <li>24-hour online access to your invoices &amp; statements.</li>
             <li>Pay your account online by credit card or ACH.</li>
@@ -158,13 +140,13 @@ export default function Toolbx() {
         <div className="feature-column">
           {/* Column 1 — Account Sign-In */}
           <div className="feature-item">
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-              <h5 style={{ fontWeight: 700, marginBottom: '20px', marginTop: '60px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+              <h5 style={{ fontWeight: 700, marginBottom: '24px', marginTop: '0', textAlign: 'center' }}>
                 I&apos;ve already set up my online<br />Beisser Lumber Company Customer Portal Account
               </h5>
               <button
                 className="tbx-sign-in-btn"
-                onClick={() => { window.top.location.href = PORTAL_SIGNIN_URL; }}
+                onClick={() => { window.open(PORTAL_SIGNIN_URL, '_blank', 'noopener,noreferrer'); }}
               >
                 Account Sign-In
               </button>
