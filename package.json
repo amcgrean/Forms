@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@upstash/redis": "^1.36.3",
+    "lucide-react": "^0.577.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
