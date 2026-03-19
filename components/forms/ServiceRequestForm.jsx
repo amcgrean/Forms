@@ -16,6 +16,8 @@ export default function ServiceRequestForm({ onSuccess }) {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle');
 
+  const [serverError, setServerError] = useState('');
+
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
     setFields((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
@@ -30,11 +32,24 @@ export default function ServiceRequestForm({ onSuccess }) {
       alert("Please fill out all required fields.");
       return;
     }
+    
     setStatus('loading');
-    setTimeout(() => {
+    setServerError('');
+
+    try {
+      const res = await fetch('/api/service-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fields),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || 'Submission failed.');
       setStatus('success');
       if (onSuccess) onSuccess();
-    }, 1000);
+    } catch (err) {
+      setStatus('error');
+      setServerError(err.message || 'An unexpected error occurred. Please try again.');
+    }
   }
 
   if (status === 'success') {
@@ -129,6 +144,12 @@ export default function ServiceRequestForm({ onSuccess }) {
           <textarea name="issueDescription" value={fields.issueDescription} onChange={handleChange} required rows={4} style={styles.textarea} />
         </div>
       </div>
+
+      {status === 'error' && serverError && (
+        <p style={{ padding: '10px 14px', background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: '6px', fontSize: '0.875rem', color: '#c0392b' }}>
+          {serverError}
+        </p>
+      )}
 
       <button type="submit" disabled={status === 'loading'} style={{ ...styles.submitButton, opacity: status === 'loading' ? 0.7 : 1, cursor: status === 'loading' ? 'not-allowed' : 'pointer' }}>
         {status === 'loading' ? 'Submitting...' : 'Submit Request'}

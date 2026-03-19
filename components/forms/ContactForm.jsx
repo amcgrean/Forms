@@ -48,11 +48,20 @@ export default function ContactForm({ onSuccess }) {
     setStatus('loading');
     setServerError('');
 
-    // Mock submission for now
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fields),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || 'Submission failed.');
       setStatus('success');
       if (onSuccess) onSuccess();
-    }, 1000);
+    } catch (err) {
+      setStatus('error');
+      setServerError(err.message || 'An unexpected error occurred. Please try again.');
+    }
   }
 
   if (status === 'success') {
