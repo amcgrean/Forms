@@ -32,7 +32,7 @@ A Next.js application that replaces the self-registration flow on `pro.beisserlu
    ```
    RESEND_API_KEY=re_xxxxxxxxxxxx
    FROM_EMAIL=noreply@beisserlumber.com
-   TO_EMAIL=sales@beisserlumber.com
+   TO_EMAIL=ar@beisserlumber.com
    ```
 
 4. **Add the Beisser logo**
@@ -114,7 +114,7 @@ Redirect 301 /pro-account https://pro-account.beisserlumber.com
 |------------------|------------------------------------------------------|----------------------------------|
 | `RESEND_API_KEY` | API key from Resend dashboard                        | `re_xxxxxxxxxxxx`                |
 | `FROM_EMAIL`     | Verified sender address (must be on verified domain) | `noreply@beisserlumber.com`      |
-| `TO_EMAIL`       | Staff recipient for request notifications            | `sales@beisserlumber.com`        |
+| `TO_EMAIL`       | Staff recipient for request notifications            | `ar@beisserlumber.com`           |
 
 **Never commit `.env.local` or any file containing real credentials.**
 
